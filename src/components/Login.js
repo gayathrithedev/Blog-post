@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import fire from "../config/Fire";
 import "./Login.scss";
+import { FaEnvelope, FaLock } from "react-icons/fa";
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -47,27 +48,41 @@ class Login extends Component {
         <div className="form">
           <form>
             <h3>Login to Blogpost</h3>
-            <input
-              type="text"
-              name="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
-            <input
-              type="password"
-              name="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-            />
-            <button type="submit" onClick={this.login}>
-              LogIn
-            </button>
+            <div className="email">
+              <div className="svg">
+                <FaEnvelope />
+              </div>
+              <input
+                type="text"
+                name="email"
+                placeholder="Email"
+                value={this.state.email}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="password">
+              <div className="svg">
+                <FaLock />
+              </div>
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={this.state.password}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="submit">
+              <button type="submit" onClick={this.login}>
+                LogIn
+              </button>
+              <button onClick={this.signup}>SignUp</button>
+            </div>
           </form>
         </div>
         <div className="welcome">
           <h3>Welcome</h3>
           <h4>Don't have an account please sign up here...</h4>
-          <button onClick={this.signup}>SignUp</button>
         </div>
       </div>
     );
