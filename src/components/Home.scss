@@ -1,0 +1,30 @@
+.containerlayout {
+  .navbar {
+    height: 70px;
+    padding: 0 30px;
+    box-shadow: -29px 2px 58px 5px lightgrey;
+    .profile {
+      padding: 20px 0px;
+      float: right;
+      button {
+        border: none;
+        padding: 7px 14px;
+        font-size: 15px;
+        border-radius: 20px;
+      }
+    }
+  }
+  .postcontainer {
+    display: flex;
+    margin: 50px;
+    border: 1px solid lightgray;
+    padding: 50px;
+    box-shadow: 10px 10px 48px -5px lightgrey;
+    .postlist {
+      width: 50%;
+    }
+    .showpost {
+      width: 50%;
+    }
+  }
+}
