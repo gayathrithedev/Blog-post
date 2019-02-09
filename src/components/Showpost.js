@@ -66,7 +66,7 @@ class Showpost extends Component {
             })}
           </tbody>
         </table>
-        <div className="dummy">
+        <div className="singlepost">
           hi
           {this.state.posts.map(post => {
             if (post.key === postkey)

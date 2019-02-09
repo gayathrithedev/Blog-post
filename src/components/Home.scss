@@ -15,13 +15,13 @@
     }
   }
   .postcontainer {
-    display: flex;
     margin: 50px;
     border: 1px solid lightgray;
     padding: 50px;
     box-shadow: 10px 10px 48px -5px lightgrey;
     .postlist {
-      width: 50%;
+      display: flex;
+      flex-direction: row;
     }
     .showpost {
       width: 50%;

@@ -45,11 +45,9 @@ class Home extends Component {
         </div>
         <div className="newpost">{this.state.flag ? <Newpost /> : null}</div>
         <div className="postcontainer">
-          <div className="postlist">
-            <h3>welcome</h3>
+          <div className="showpost">
             <Showpost />
           </div>
-          <div className="showpost">Post</div>
         </div>
       </div>
     );
