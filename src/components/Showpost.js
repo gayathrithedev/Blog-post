@@ -34,11 +34,14 @@ class Showpost extends Component {
   }
 
   singlepost = key => {
-    this.setState.keyid = key;
-    alert(this.setState.keyid);
+    this.setState({
+      keyid: key
+    });
+    alert(this.state.keyid);
   };
 
   render() {
+    var postkey = this.state.keyid;
     return (
       <div className="postlist">
         <table>
@@ -66,7 +69,7 @@ class Showpost extends Component {
         <div className="dummy">
           hi
           {this.state.posts.map(post => {
-            if (post.author === fire.auth().currentUser.email)
+            if (post.key === postkey)
               return (
                 <tr onClick={() => this.singlepost(post.key)}>
                   <td>{post.title}</td>
