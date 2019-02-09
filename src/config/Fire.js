@@ -1,12 +1,15 @@
 import firebase from "firebase";
+import firestore from "firebase/firestore";
 
+const settings = { timestampsInSnapshots: true };
 const config = {
-  apiKey: "AIzaSyB6CcI5g7aNlk07WncmgJVijGqEmJuWwQs",
-  authDomain: "blogpost-69dd8.firebaseapp.com",
-  databaseURL: "https://blogpost-69dd8.firebaseio.com",
-  projectId: "blogpost-69dd8",
-  storageBucket: "blogpost-69dd8.appspot.com",
-  messagingSenderId: "499429125168"
+  apiKey: "AIzaSyDMgTvNUUBSzIVLAlqLJkWvth__M6W2ZF0",
+  authDomain: "myproject-db4af.firebaseapp.com",
+  databaseURL: "https://myproject-db4af.firebaseio.com",
+  projectId: "myproject-db4af",
+  storageBucket: "myproject-db4af.appspot.com",
+  messagingSenderId: "786232624466"
 };
-const fire = firebase.initializeApp(config);
-export default fire;
+firebase.initializeApp(config);
+firebase.firestore().settings(settings);
+export default firebase;
