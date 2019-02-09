@@ -7,6 +7,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.logout = this.logout.bind(this);
+    this.ref = fire.firestore().collection("posts");
     this.state = {
       title: "",
       description: "",
@@ -40,7 +41,6 @@ class Home extends Component {
       })
       .then(docRef => {
         this.setState({
-          author: "",
           title: "",
           description: ""
         });
@@ -63,6 +63,9 @@ class Home extends Component {
           </div>
         </div>
         <div className="postcontainer">
+          <div className="create">
+            <button>Create new post</button>
+          </div>
           <div className="postlist">
             <h3>welcome</h3>
             <div className="newpost">
