@@ -37,7 +37,20 @@ class Showpost extends Component {
     this.setState({
       keyid: key
     });
-    alert(this.state.keyid);
+  };
+
+  deletePost = id => {
+    fire
+      .firestore()
+      .collection("posts")
+      .doc(id)
+      .delete()
+      .then(() => {
+        console.log("Document successfully deleted!");
+      })
+      .catch(error => {
+        console.error("Error removing document: ", error);
+      });
   };
 
   render() {
@@ -71,12 +84,17 @@ class Showpost extends Component {
           {this.state.posts.map(post => {
             if (post.key === postkey)
               return (
-                <tr onClick={() => this.singlepost(post.key)}>
-                  <td>{post.title}</td>
-                  <td>{post.description}</td>
-                  <td>{post.author}</td>
-                  <td>{post.key}</td>
-                </tr>
+                <div>
+                  <tr>
+                    <td>{post.title}</td>
+                    <td>{post.description}</td>
+                    <td>{post.author}</td>
+                    <td>{post.key}</td>
+                  </tr>
+                  <button onClick={() => this.deletePost(post.key)}>
+                    delete{post.key}
+                  </button>
+                </div>
               );
           })}
         </div>
