@@ -3,11 +3,12 @@ import fire from "../config/Fire";
 class Newpost extends Component {
   constructor(props) {
     super(props);
-    this.ref = fire.firestore().collection("posts");
+    this.ref = fire.firestore().collection("postss");
     this.state = {
       title: "",
       description: "",
-      author: fire.auth().currentUser.email
+      author: fire.auth().currentUser.email,
+      datetime: ""
     };
   }
 
@@ -15,18 +16,20 @@ class Newpost extends Component {
     const state = this.state;
     state[e.target.name] = e.target.value;
     this.setState(state);
+    console.log(this.state.datetime);
   };
 
   onSubmit = e => {
     e.preventDefault();
 
-    const { author, title, description } = this.state;
+    const { author, title, description, datetime } = this.state;
 
     this.ref
       .add({
         author,
         title,
-        description
+        description,
+        datetime: fire.firestore.FieldValue.serverTimestamp()
       })
       .then(docRef => {
         this.setState({

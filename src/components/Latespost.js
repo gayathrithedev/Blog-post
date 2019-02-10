@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import fire from "../config/Fire";
 import Editpost from "./Editpost";
-import Latestpost from "./Latespost";
 
 class Showpost extends Component {
   constructor(props) {
@@ -39,6 +38,7 @@ class Showpost extends Component {
   componentDidMount() {
     this.connect = this.ref
       .orderBy("datetime", "desc")
+      .limit(1)
       .onSnapshot(this.onCollectionUpdate);
   }
 
@@ -76,53 +76,25 @@ class Showpost extends Component {
   }
 
   render() {
-    var postkey = this.state.keyid;
     return (
-      <div className="postlist">
-        <div className="scrollparent">
-          <div className="scroll">
-            <table>
-              <thead>
-                <tr />
-              </thead>
-              <tbody>
-                {this.state.postss.map(post => {
-                  if (post.author === fire.auth().currentUser.email)
-                    return (
-                      <tr onClick={() => this.singlepost(post.key)}>
-                        <td>{post.title}</td>
-                        {console.log(post.datetime)}
-                      </tr>
-                    );
-                })}
-              </tbody>
-            </table>
-          </div>
-        </div>
-        {this.state.latest ? (
-          <div className="singlepost">
-            {this.state.postss.map(post => {
-              if (post.key === postkey)
-                return (
-                  <div>
-                    <h1>{post.title}</h1>
-                    <p>{post.description}</p>
-                    <div className="operations">
-                      <button onClick={this.editPost}>edit</button>
-                      <button onClick={() => this.deletePost(post.key)}>
-                        delete
-                      </button>
-                    </div>
-                    <div className="edit">
-                      {this.state.flag ? <Editpost postData={post} /> : null}
-                    </div>
-                  </div>
-                );
-            })}
-          </div>
-        ) : (
-          <Latestpost allPosts={this.state.posts} />
-        )}
+      <div className="singlepost">
+        {this.state.postss.map(post => {
+          return (
+            <div>
+              <h1>{post.title}</h1>
+              <p>{post.description}</p>
+              <div className="operations">
+                <button onClick={this.editPost}>edit</button>
+                <button onClick={() => this.deletePost(post.key)}>
+                  delete
+                </button>
+              </div>
+              <div className="edit">
+                {this.state.flag ? <Editpost postData={post} /> : null}
+              </div>
+            </div>
+          );
+        })}
       </div>
     );
   }

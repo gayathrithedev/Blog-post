@@ -32,13 +32,11 @@ class Editpost extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    this.setState({
-      flag: true
-    });
+    alert("updated");
     const { author, title, description } = this.state;
     const updateRef = fire
       .firestore()
-      .collection("posts")
+      .collection("postss")
       .doc(this.state.key);
     updateRef
       .set({
