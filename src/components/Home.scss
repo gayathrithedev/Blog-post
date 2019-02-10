@@ -31,30 +31,82 @@
     .postlist {
       display: flex;
       flex-direction: row;
-      table {
-        border-collapse: collapse;
-        margin-right: 20px;
+      .scrollparent {
         width: 50%;
-        thead {
-          tr {
-            th {
-              padding: 20px;
+        .scroll {
+          table {
+            border-collapse: collapse;
+            margin-right: 20px;
+            thead {
+              tr {
+                th {
+                  padding: 20px;
+                }
+              }
             }
-          }
-        }
-        tbody {
-          tr {
-            box-shadow: -2px 8px 5px -5px lightgrey;
-            cursor: pointer;
-            td {
-              padding: 20px;
-              margin: 20px 0;
+            tbody {
+              tr {
+                box-shadow: -2px 8px 5px -5px lightgrey;
+                cursor: pointer;
+                td {
+                  padding: 20px;
+                  margin: 20px 0;
+                }
+              }
             }
           }
         }
       }
       .singlepost {
+        padding: 50px;
+        border-left: 1px solid lightgray;
         width: 50%;
+        .operations {
+          display: flex;
+          flex-direction: row;
+          button {
+            width: 100px;
+            border-radius: 20px;
+            border: none;
+            font-size: 15px;
+            padding: 10px 20px;
+            margin-right: 20px;
+          }
+        }
+        .edit {
+          margin-top: 50px;
+          .post {
+            form {
+              display: flex;
+              flex-direction: column;
+              input {
+                border: none;
+                outline: none;
+                background-color: rgba(0, 0, 0, 0.03);
+                font-size: 18px;
+                padding: 10px 16px;
+                margin-bottom: 30px;
+              }
+              textarea {
+                margin-bottom: 30px;
+                height: 150px;
+                border: none;
+                outline: none;
+                background-color: rgba(0, 0, 0, 0.03);
+                font-size: 16px;
+                padding: 10px 16px;
+              }
+              button {
+                width: 100px;
+                border: none;
+                outline: none;
+                padding: 10px 20px;
+                font-size: 15px;
+                border-radius: 20px;
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -106,4 +158,13 @@
       }
     }
   }
+}
+
+.show {
+  border: none;
+  font-size: 15px;
+}
+
+.hidekey {
+  display: none;
 }

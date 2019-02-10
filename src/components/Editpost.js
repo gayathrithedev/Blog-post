@@ -6,7 +6,7 @@ class Editpost extends Component {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
     this.state = {
-      flag: true,
+      flag: false,
       key: "",
       author: "",
       title: "",
@@ -21,6 +21,7 @@ class Editpost extends Component {
       description: this.props.postData.description,
       author: this.props.postData.author
     });
+    console.log(this.props.flagEdit);
   }
 
   onChange = e => {
@@ -32,9 +33,8 @@ class Editpost extends Component {
   onSubmit(e) {
     e.preventDefault();
     this.setState({
-      flag: false
+      flag: true
     });
-    console.log(this.state.flag);
     const { author, title, description } = this.state;
     const updateRef = fire
       .firestore()
@@ -61,7 +61,7 @@ class Editpost extends Component {
     return (
       <div>
         <div className="post">
-          {this.state.flag ? (
+          {this.state.flag ? null : (
             <form onSubmit={this.onSubmit}>
               <input
                 type="text"
@@ -69,15 +69,14 @@ class Editpost extends Component {
                 defaultValue={this.props.postData.title}
                 onChange={this.onChange}
               />
-              <input
-                type="text"
+              <textarea
                 name="description"
                 defaultValue={this.props.postData.description}
                 onChange={this.onChange}
               />
               <button type="submit">save</button>
             </form>
-          ) : null}
+          )}
         </div>
       </div>
     );

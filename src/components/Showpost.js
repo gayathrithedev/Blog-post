@@ -11,7 +11,8 @@ class Showpost extends Component {
       posts: [],
       keyid: "",
       flag: false,
-      clsname: ""
+      author: fire.auth().currentUser.email,
+      showEdit: false
     };
     this.editPost = this.editPost.bind(this);
   }
@@ -38,9 +39,8 @@ class Showpost extends Component {
   }
 
   onChange = e => {
-    const state = this.state;
-    state[e.target.name] = e.target.value;
-    this.setState(state);
+    this.setState[e.target.name] = e.target.value;
+    console.log(e.target.value);
   };
 
   singlepost = key => {
@@ -65,7 +65,8 @@ class Showpost extends Component {
 
   editPost() {
     this.setState({
-      flag: !this.state.flag
+      flag: !this.state.flag,
+      showEdit: true
     });
   }
 
@@ -73,52 +74,50 @@ class Showpost extends Component {
     var postkey = this.state.keyid;
     return (
       <div className="postlist">
-        <table>
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Author</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.posts.map(post => {
-              if (post.author === fire.auth().currentUser.email)
-                return (
-                  <tr onClick={() => this.singlepost(post.key)}>
-                    <td>{post.title}</td>
-                    <td>{post.author}</td>
-                  </tr>
-                );
-            })}
-          </tbody>
-        </table>
+        <div className="scrollparent">
+          <div className="scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Author</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.posts.map(post => {
+                  if (post.author === fire.auth().currentUser.email)
+                    return (
+                      <tr onClick={() => this.singlepost(post.key)}>
+                        <td>{post.title}</td>
+                        <td>{post.author}</td>
+                      </tr>
+                    );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
         <div className="singlepost">
-          hi
           {this.state.posts.map(post => {
             if (post.key === postkey)
               return (
                 <div>
-                  <form>
-                    <input
-                      type="text"
-                      value={post.title}
-                      onChange={this.onChange}
-                      readOnly={!this.state.flag}
-                    />
-                    <input
-                      type="text"
-                      value={post.description}
-                      onChange={this.onChange}
-                      readOnly={!this.state.flag}
-                    />
-                  </form>
-                  <button onClick={this.editPost}>edit</button>
-                  <div className="edit">
-                    {this.state.flag ? <Editpost postData={post} /> : null}
+                  <h1>{post.title}</h1>
+                  <p>{post.description}</p>
+                  <div className="operations">
+                    <button onClick={this.editPost}>edit</button>
+                    <button onClick={() => this.deletePost(post.key)}>
+                      delete
+                    </button>
                   </div>
-                  <button onClick={() => this.deletePost(post.key)}>
-                    delete
-                  </button>
+                  <div className="edit">
+                    {this.state.flag ? (
+                      <Editpost
+                        postData={post}
+                        flagEdit={this.state.showEdit}
+                      />
+                    ) : null}
+                  </div>
                 </div>
               );
           })}
