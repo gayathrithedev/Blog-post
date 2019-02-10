@@ -31,9 +31,31 @@
     .postlist {
       display: flex;
       flex-direction: row;
-    }
-    .showpost {
-      width: 50%;
+      table {
+        border-collapse: collapse;
+        margin-right: 20px;
+        width: 50%;
+        thead {
+          tr {
+            th {
+              padding: 20px;
+            }
+          }
+        }
+        tbody {
+          tr {
+            box-shadow: -2px 8px 5px -5px lightgrey;
+            cursor: pointer;
+            td {
+              padding: 20px;
+              margin: 20px 0;
+            }
+          }
+        }
+      }
+      .singlepost {
+        width: 50%;
+      }
     }
   }
 }
@@ -46,6 +68,7 @@
     width: 120px;
     border-radius: 20px;
     font-size: 15px;
+    outline: none;
   }
   .addpost {
     width: 500px;
@@ -79,6 +102,7 @@
         border-radius: 20px;
         font-size: 15px;
         margin: 18px 0;
+        outline: none;
       }
     }
   }
