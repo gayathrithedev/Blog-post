@@ -13,6 +13,7 @@ class Showpost extends Component {
       flag: false,
       clsname: ""
     };
+    this.editPost = this.editPost.bind(this);
   }
 
   onCollectionUpdate = querySnapshot => {
@@ -62,11 +63,11 @@ class Showpost extends Component {
       });
   };
 
-  editPost = id => {
+  editPost() {
     this.setState({
       flag: !this.state.flag
     });
-  };
+  }
 
   render() {
     var postkey = this.state.keyid;
@@ -102,23 +103,21 @@ class Showpost extends Component {
                       type="text"
                       value={post.title}
                       onChange={this.onChange}
-                      readOnly
+                      readOnly={!this.state.flag}
                     />
                     <input
                       type="text"
                       value={post.description}
                       onChange={this.onChange}
-                      readOnly
+                      readOnly={!this.state.flag}
                     />
                   </form>
-                  <button onClick={() => this.editPost(post.key)}>
-                    edit{post.key}
-                  </button>
+                  <button onClick={this.editPost}>edit</button>
                   <div className="edit">
                     {this.state.flag ? <Editpost postData={post} /> : null}
                   </div>
                   <button onClick={() => this.deletePost(post.key)}>
-                    delete{post.key}
+                    delete
                   </button>
                 </div>
               );

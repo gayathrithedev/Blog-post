@@ -10,12 +10,14 @@ class Home extends Component {
     this.logout = this.logout.bind(this);
     this.state = {
       flag: false,
+      showcancel: false,
       author: fire.auth().currentUser.email,
       user: "",
       uid: "",
       email: ""
     };
     this.addEvent = this.addEvent.bind(this);
+    this.showcancel = this.showcancel.bind(this);
   }
 
   logout() {
@@ -24,10 +26,17 @@ class Home extends Component {
 
   addEvent() {
     this.setState({
-      flag: !this.state.flag
+      flag: !this.state.flag,
+      showcancel: !this.state.showcancel
     });
   }
 
+  showcancel() {
+    this.setState({
+      flag: !this.state.flag,
+      showcancel: !this.state.showcancel
+    });
+  }
   render() {
     var user = fire.auth().currentUser;
     var email = user.email;
@@ -43,7 +52,12 @@ class Home extends Component {
         <div className="create">
           <button onClick={this.addEvent}>Create new post</button>
         </div>
-        <div className="newpost">{this.state.flag ? <Newpost /> : null}</div>
+        <div className="newpost">
+          {this.state.flag ? <Newpost /> : null}
+          {this.state.showcancel ? (
+            <button onClick={this.showcancel}>cancel</button>
+          ) : null}
+        </div>
         <div className="postcontainer">
           <div className="showpost">
             <Showpost />

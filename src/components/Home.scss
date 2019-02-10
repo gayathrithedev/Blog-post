@@ -37,3 +37,49 @@
     }
   }
 }
+
+.newpost {
+  button {
+    margin: 50px;
+    border: none;
+    padding: 10px 20px;
+    width: 120px;
+    border-radius: 20px;
+    font-size: 15px;
+  }
+  .addpost {
+    width: 500px;
+    margin: 50px 0 0 50px;
+    padding: 50px;
+    box-shadow: 3px 1px 42px -6px lightgrey;
+    form {
+      display: flex;
+      flex-direction: column;
+      input {
+        padding: 10px 16px;
+        border: none;
+        background-color: rgba(0, 0, 0, 0.03);
+        font-size: 15px;
+        outline: none;
+        margin: 15px 0;
+      }
+      textarea {
+        height: 117px;
+        padding: 10px 16px;
+        border: none;
+        background-color: rgba(0, 0, 0, 0.03);
+        font-size: 15px;
+        outline: none;
+        margin: 15px 0;
+      }
+      button {
+        border: none;
+        padding: 10px 20px;
+        width: 120px;
+        border-radius: 20px;
+        font-size: 15px;
+        margin: 18px 0;
+      }
+    }
+  }
+}

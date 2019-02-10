@@ -42,7 +42,7 @@ class Newpost extends Component {
   render() {
     const { author, title, description } = this.state;
     return (
-      <div className="newpost">
+      <div className="addpost">
         <form onSubmit={this.onSubmit}>
           <input
             type="text"
@@ -57,12 +57,6 @@ class Newpost extends Component {
             value={description}
             onChange={this.onChange}
             placeholder="Description"
-          />
-          <input
-            type="text"
-            name="author"
-            value={author}
-            onChange={this.onChange}
           />
           <button type="submit">submit</button>
         </form>
