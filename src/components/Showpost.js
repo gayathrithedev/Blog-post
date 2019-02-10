@@ -66,6 +66,9 @@ class Showpost extends Component {
       .catch(error => {
         console.error("Error removing post: ", error);
       });
+    this.setState({
+      latest: false
+    });
   };
 
   editPost() {
@@ -121,7 +124,7 @@ class Showpost extends Component {
             })}
           </div>
         ) : (
-          <Latestpost allPosts={this.state.posts} />
+          <Latestpost />
         )}
       </div>
     );
