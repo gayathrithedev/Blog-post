@@ -10,7 +10,8 @@ class Editpost extends Component {
       key: "",
       author: "",
       title: "",
-      description: ""
+      description: "",
+      datetime: ""
     };
   }
 
@@ -19,7 +20,8 @@ class Editpost extends Component {
       key: this.props.postData.key,
       title: this.props.postData.title,
       description: this.props.postData.description,
-      author: this.props.postData.author
+      author: this.props.postData.author,
+      datetime: this.props.postData.datetime
     });
     console.log(this.props.flagEdit);
   }
@@ -33,7 +35,7 @@ class Editpost extends Component {
   onSubmit(e) {
     e.preventDefault();
     alert("updated");
-    const { author, title, description } = this.state;
+    const { author, title, description, datetime } = this.state;
     const updateRef = fire
       .firestore()
       .collection("postss")
@@ -42,7 +44,8 @@ class Editpost extends Component {
       .set({
         title,
         description,
-        author
+        author,
+        datetime
       })
       .then(docRef => {
         this.setState({
