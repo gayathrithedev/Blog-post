@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import fire from "../config/Fire";
+import Editpost from "./Editpost";
 
 class Showpost extends Component {
   constructor(props) {
@@ -8,7 +9,9 @@ class Showpost extends Component {
     this.unsubscribe = null;
     this.state = {
       posts: [],
-      keyid: ""
+      keyid: "",
+      flag: false,
+      clsname: ""
     };
   }
 
@@ -33,6 +36,12 @@ class Showpost extends Component {
     this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
   }
 
+  onChange = e => {
+    const state = this.state;
+    state[e.target.name] = e.target.value;
+    this.setState(state);
+  };
+
   singlepost = key => {
     this.setState({
       keyid: key
@@ -53,6 +62,12 @@ class Showpost extends Component {
       });
   };
 
+  editPost = id => {
+    this.setState({
+      flag: !this.state.flag
+    });
+  };
+
   render() {
     var postkey = this.state.keyid;
     return (
@@ -61,7 +76,6 @@ class Showpost extends Component {
           <thead>
             <tr>
               <th>Title</th>
-              <th>Description</th>
               <th>Author</th>
             </tr>
           </thead>
@@ -71,9 +85,7 @@ class Showpost extends Component {
                 return (
                   <tr onClick={() => this.singlepost(post.key)}>
                     <td>{post.title}</td>
-                    <td>{post.description}</td>
                     <td>{post.author}</td>
-                    <td>{post.key}</td>
                   </tr>
                 );
             })}
@@ -85,12 +97,26 @@ class Showpost extends Component {
             if (post.key === postkey)
               return (
                 <div>
-                  <tr>
-                    <td>{post.title}</td>
-                    <td>{post.description}</td>
-                    <td>{post.author}</td>
-                    <td>{post.key}</td>
-                  </tr>
+                  <form>
+                    <input
+                      type="text"
+                      value={post.title}
+                      onChange={this.onChange}
+                      readOnly
+                    />
+                    <input
+                      type="text"
+                      value={post.description}
+                      onChange={this.onChange}
+                      readOnly
+                    />
+                  </form>
+                  <button onClick={() => this.editPost(post.key)}>
+                    edit{post.key}
+                  </button>
+                  <div className="edit">
+                    {this.state.flag ? <Editpost postData={post} /> : null}
+                  </div>
                   <button onClick={() => this.deletePost(post.key)}>
                     delete{post.key}
                   </button>
