@@ -79,21 +79,22 @@ class Showpost extends Component {
     return (
       <div className="singlepost">
         {this.state.postss.map(post => {
-          return (
-            <div>
-              <h1>{post.title}</h1>
-              <p>{post.description}</p>
-              <div className="operations">
-                <button onClick={this.editPost}>edit</button>
-                <button onClick={() => this.deletePost(post.key)}>
-                  delete
-                </button>
+          if (this.state.author === post.author)
+            return (
+              <div>
+                <h1>{post.title}</h1>
+                <p>{post.description}</p>
+                <div className="operations">
+                  <button onClick={this.editPost}>edit</button>
+                  <button onClick={() => this.deletePost(post.key)}>
+                    delete
+                  </button>
+                </div>
+                <div className="edit">
+                  {this.state.flag ? <Editpost postData={post} /> : null}
+                </div>
               </div>
-              <div className="edit">
-                {this.state.flag ? <Editpost postData={post} /> : null}
-              </div>
-            </div>
-          );
+            );
         })}
       </div>
     );
