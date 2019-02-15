@@ -2,13 +2,13 @@ import firebase from "firebase";
 import firestore from "firebase/firestore";
 
 const settings = { timestampsInSnapshots: true };
-const config = {
-  apiKey: "AIzaSyB6CcI5g7aNlk07WncmgJVijGqEmJuWwQs",
-  authDomain: "blogpost-69dd8.firebaseapp.com",
-  databaseURL: "https://blogpost-69dd8.firebaseio.com",
-  projectId: "blogpost-69dd8",
-  storageBucket: "blogpost-69dd8.appspot.com",
-  messagingSenderId: "499429125168"
+var config = {
+  apiKey: "AIzaSyA9sME6Slc_a3vV4sxh2F4wEld0rXbvfyg",
+  authDomain: "awesome-blog-9900e.firebaseapp.com",
+  databaseURL: "https://awesome-blog-9900e.firebaseio.com",
+  projectId: "awesome-blog-9900e",
+  storageBucket: "",
+  messagingSenderId: "356937884597"
 };
 firebase.initializeApp(config);
 firebase.firestore().settings(settings);

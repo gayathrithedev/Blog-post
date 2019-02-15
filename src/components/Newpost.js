@@ -53,6 +53,7 @@ class Newpost extends Component {
             value={title}
             onChange={this.onChange}
             placeholder="Title"
+            required
           />
           <textarea
             type="text"
@@ -60,6 +61,7 @@ class Newpost extends Component {
             value={description}
             onChange={this.onChange}
             placeholder="Description"
+            required
           />
           <button type="submit">submit</button>
         </form>

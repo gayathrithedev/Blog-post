@@ -1,0 +1,81 @@
+.container {
+  margin: 50px;
+  font-family: "Montserrat", sans-serif;
+  .toplayout {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    .logo {
+      font-size: 40px;
+      font-weight: 300;
+      letter-spacing: -3px;
+    }
+    .auth {
+      text-align: center;
+      line-height: 60px;
+      a {
+        margin: 0 10px;
+        text-decoration: none;
+        color: black;
+      }
+      .register {
+        padding: 8px 16px;
+        border: 1px solid lightpink;
+        border-radius: 5px;
+        transition: background-color 1s;
+      }
+      .register:hover {
+        cursor: pointer;
+        background-color: lightpink;
+      }
+    }
+  }
+  .navbar {
+    display: flex;
+    margin: 28px 0;
+    justify-content: space-between;
+    input[type="text"] {
+      border: none;
+      border-bottom: 1px solid lightpink;
+      outline: none;
+      padding: 10px 20px;
+      font-size: 15px;
+    }
+    .search {
+      .searchresult {
+        svg {
+          margin-left: -26px;
+        }
+      }
+    }
+    .menu {
+      ul {
+        li {
+          display: inline;
+          a {
+            margin: 0 20px;
+            text-decoration: none;
+            color: black;
+            transition: border-bottom 0.1s ease-in-out;
+          }
+          a:hover {
+            padding-bottom: 13px;
+            border-bottom: 2px solid orange;
+          }
+          a:active {
+            padding-bottom: 13px;
+            border-bottom: 2px solid orange;
+          }
+        }
+      }
+    }
+  }
+}
+.allpost {
+  display: grid;
+  grid-template-columns: 75% 25%;
+  .recentpost-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+}

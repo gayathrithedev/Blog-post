@@ -79,7 +79,7 @@ class Showpost extends Component {
     return (
       <div className="singlepost">
         {this.state.postss.map(post => {
-          if (this.state.author === post.author)
+          if (post.author === fire.auth().currentUser.email)
             return (
               <div>
                 <h1>{post.title}</h1>

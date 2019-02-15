@@ -69,11 +69,13 @@ class Editpost extends Component {
                 name="title"
                 defaultValue={this.props.postData.title}
                 onChange={this.onChange}
+                required
               />
               <textarea
                 name="description"
                 defaultValue={this.props.postData.description}
                 onChange={this.onChange}
+                required
               />
               <button type="submit">save</button>
             </form>
