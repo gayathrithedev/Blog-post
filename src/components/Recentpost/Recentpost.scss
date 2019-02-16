@@ -1,0 +1,56 @@
+.recentpost-container {
+}
+.middle {
+  left: 32%;
+  top: 23%;
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}
+.post:hover .middle {
+  opacity: 1;
+}
+.post:hover img {
+  opacity: 0.3;
+}
+h3,
+img {
+  cursor: pointer;
+}
+h3 {
+  line-height: 20px;
+  font-weight: 700;
+  transition: color 0.3s ease-in;
+}
+h3:hover {
+  color: #de7b85;
+}
+h3,
+h5,
+p {
+  width: 300px;
+}
+img {
+  width: 350px;
+  height: 200px;
+  transition: opacity 0.5s ease-in;
+}
+p {
+  font-weight: 200;
+  letter-spacing: 2px;
+  font-size: 14px;
+}
+h5 {
+  font-weight: 400;
+  color: #de7b85;
+  transition: padding-left 0.5s ease-in;
+}
+.post {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+  transition: padding-left 0.5s;
+}
+.post:hover h5 {
+  padding-left: 20px;
+}

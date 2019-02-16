@@ -18,6 +18,15 @@
         text-decoration: none;
         color: black;
       }
+      button {
+        border: none;
+        padding: 10px;
+        background: white;
+        cursor: pointer;
+      }
+      button:hover {
+        color: #de7b85;
+      }
       .register {
         padding: 8px 16px;
         border: 1px solid lightpink;
@@ -27,6 +36,7 @@
       .register:hover {
         cursor: pointer;
         background-color: lightpink;
+        color: white !important;
       }
     }
   }
@@ -34,12 +44,17 @@
     display: flex;
     margin: 28px 0;
     justify-content: space-between;
-    input[type="text"] {
+    input {
       border: none;
+      width: 200px;
       border-bottom: 1px solid lightpink;
       outline: none;
       padding: 10px 20px;
       font-size: 15px;
+      transition: width 0.5s;
+    }
+    input:hover {
+      width: 300px;
     }
     .search {
       .searchresult {
@@ -48,8 +63,12 @@
         }
       }
     }
+    .searchresult:hover input {
+      width: 300px;
+    }
     .menu {
       ul {
+        display: block;
         li {
           display: inline;
           a {
@@ -59,7 +78,7 @@
             transition: border-bottom 0.1s ease-in-out;
           }
           a:hover {
-            padding-bottom: 13px;
+            padding-bottom: 10px;
             border-bottom: 2px solid orange;
           }
           a:active {
@@ -73,9 +92,35 @@
 }
 .allpost {
   display: grid;
-  grid-template-columns: 75% 25%;
+  grid-template-columns: 70% 30%;
   .recentpost-container {
     display: grid;
     grid-template-columns: 50% 50%;
   }
+}
+#signupform {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+#loginform {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
 }

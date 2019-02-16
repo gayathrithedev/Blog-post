@@ -1,25 +1,29 @@
 import React, { Component } from "react";
 import { FaUser, FaEnvelope, FaLock, FaTimes } from "react-icons/fa";
 import firebase from "../../config/Fire";
-import "./Signup.scss";
+import "./Login.scss";
 
-class Signup extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
       email: "",
       password: ""
     };
     this.handleChange = this.handleChange.bind(this);
-    this.signup = this.signup.bind(this);
+    this.signin = this.signin.bind(this);
   }
 
-  signup(e) {
+  loginclose() {
+    var close = document.getElementById("loginform");
+    close.style.display = "none";
+  }
+
+  signin(e) {
     e.preventDefault();
     firebase
       .auth()
-      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .signInWithEmailAndPassword(this.state.email, this.state.password)
       .catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
@@ -36,27 +40,12 @@ class Signup extends Component {
 
   confirmPwd() {}
 
-  signupclose() {
-    var close = document.getElementById("signupform");
-    close.style.display = "none";
-  }
-
   render() {
     return (
-      <div className="signup-container">
-        <form onSubmit={this.signup}>
+      <div className="login-container">
+        <form onSubmit={this.signin}>
           <div className="close">
-            <FaTimes onClick={this.signupclose} />
-          </div>
-          <div className="input">
-            <FaUser />
-            <input
-              type="text"
-              name="username"
-              placeholder="Username"
-              onChange={this.handleChange}
-              required
-            />
+            <FaTimes onClick={this.loginclose} />
           </div>
           <div className="input">
             <FaEnvelope />
@@ -80,16 +69,6 @@ class Signup extends Component {
               required
             />
           </div>
-          <div className="input">
-            <FaLock />
-            <input
-              type="password"
-              name="confirmpassword"
-              placeholder="Confirm Passsword"
-              onChange={this.confirmPwd}
-              required
-            />
-          </div>
           <button onClick={this.userDetails} type="submit">
             Register
           </button>
@@ -98,4 +77,4 @@ class Signup extends Component {
     );
   }
 }
-export default Signup;
+export default Login;

@@ -1,15 +1,28 @@
 import React, { Component } from "react";
 import { FaSearch } from "react-icons/fa";
 import "./Index.scss";
+import Viewpost from "../Viewpost/Viewpost";
+import Login from "../Login/Login";
+import Signup from "../Signup/Signup";
 import Famous from "../Famous/Famous";
-import RecentPost from "../Recentpost/Recentpost";
-import Listpost from "../Listpost/Listpost";
+import { FaTimes } from "react-icons/fa";
 
 class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
+  showsignup() {
+    var form = document.getElementById("signupform");
+    form.style.display = "block";
+  }
+
+  showlogin() {
+    var form = document.getElementById("loginform");
+    form.style.display = "block";
+  }
+
   render() {
     return (
       <div className="container">
@@ -17,10 +30,10 @@ class Index extends Component {
           <div className="toplayout">
             <div className="logo">Blog Journal</div>
             <div className="auth">
-              <a href="/login">Sign In</a>
-              <a href="/register" className="register">
+              <button onClick={this.showlogin}>Sign In</button>
+              <button href="" onClick={this.showsignup} className="register">
                 Get Started
-              </a>
+              </button>
             </div>
           </div>
 
@@ -54,17 +67,13 @@ class Index extends Component {
               </form>
             </div>
           </div>
-          <div className="famous">
-            <Famous />
-          </div>
         </div>
-        <div className="allpost">
-          <div className="recentpost">
-            <RecentPost />
-          </div>
-          <div className="listpost">
-            <Listpost />
-          </div>
+        <Famous />
+        <div id="signupform">
+          <Signup />
+        </div>
+        <div id="loginform">
+          <Login />
         </div>
       </div>
     );
