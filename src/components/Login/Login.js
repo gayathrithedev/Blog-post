@@ -24,15 +24,13 @@ class Login extends Component {
     firebase
       .auth()
       .signInWithEmailAndPassword(this.state.email, this.state.password)
-      .catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // ...
+      .then(u => {})
+      .catch(error => {
+        console.log(error);
       });
+    var close = document.getElementById("loginform");
+    close.style.display = "none";
   }
-
-  userDetails() {}
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -69,9 +67,7 @@ class Login extends Component {
               required
             />
           </div>
-          <button onClick={this.userDetails} type="submit">
-            Register
-          </button>
+          <button type="submit">Login</button>
         </form>
       </div>
     );

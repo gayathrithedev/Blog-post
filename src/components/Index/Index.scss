@@ -4,7 +4,7 @@
   .toplayout {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     .logo {
       font-size: 40px;
       font-weight: 300;
@@ -68,6 +68,7 @@
     }
     .menu {
       ul {
+        padding-left: 0;
         display: block;
         li {
           display: inline;
@@ -123,4 +124,48 @@
   overflow: auto;
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
+}
+
+.myinfo {
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  .myprofile {
+    margin-left: 10px;
+    h3 {
+      line-height: 30px;
+      margin-block-start: 0;
+      margin-block-end: 0;
+      width: unset;
+    }
+  }
+}
+
+.me {
+  .myinfo {
+    p {
+      display: none;
+    }
+  }
+  ul {
+    margin-left: -200px;
+    width: 250px;
+    height: 350px;
+    display: none;
+    list-style-type: none;
+    transition: display 0.5s ease-in;
+    position: fixed;
+    background: white;
+    padding: 0 20px;
+    margin-top: 0;
+    li {
+      padding: 20px 0;
+      cursor: pointer;
+    }
+  }
+}
+.me:hover ul {
+  display: block;
 }

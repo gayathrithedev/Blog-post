@@ -2,17 +2,24 @@ import React, { Component } from "react";
 import { FaUser, FaEnvelope, FaLock, FaTimes } from "react-icons/fa";
 import firebase from "../../config/Fire";
 import "./Signup.scss";
+import FileUploader from "react-firebase-file-uploader";
 
 class Signup extends Component {
   constructor(props) {
     super(props);
+    this.ref = firebase.firestore().collection("users");
     this.state = {
       username: "",
       email: "",
-      password: ""
+      password: "",
+      avatar: "",
+      isUploading: false,
+      progress: 0,
+      avatarURL: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.signup = this.signup.bind(this);
+    this.userDetails = this.userDetails.bind(this);
   }
 
   signup(e) {
@@ -28,7 +35,25 @@ class Signup extends Component {
       });
   }
 
-  userDetails() {}
+  userDetails() {
+    const { username, email, avatarURL } = this.state;
+    this.ref
+      .add({
+        username,
+        email,
+        avatarURL
+      })
+      .then(docRef => {
+        this.setState({
+          username: "",
+          email: "",
+          password: ""
+        });
+      })
+      .catch(error => {
+        console.error("Error adding document", error);
+      });
+  }
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -40,6 +65,16 @@ class Signup extends Component {
     var close = document.getElementById("signupform");
     close.style.display = "none";
   }
+
+  handleUploadSuccess = filename => {
+    this.setState({ avatar: filename, progress: 100, isUploading: false });
+    firebase
+      .storage()
+      .ref("images")
+      .child(filename)
+      .getDownloadURL()
+      .then(url => this.setState({ avatarURL: url }));
+  };
 
   render() {
     return (
@@ -89,6 +124,32 @@ class Signup extends Component {
               onChange={this.confirmPwd}
               required
             />
+          </div>
+          <div className="avatarupload">
+            {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
+            {this.state.avatarURL && (
+              <img src={this.state.avatarURL} alt="avatar" />
+            )}
+            <label
+              style={{
+                backgroundColor: "steelblue",
+                color: "white",
+                padding: 10,
+                borderRadius: 4,
+                pointer: "cursor"
+              }}
+            >
+              Select your awesome avatar
+              <FileUploader
+                hidden
+                accept="image/*"
+                storageRef={firebase.storage().ref("images")}
+                onUploadStart={this.handleUploadStart}
+                onUploadError={this.handleUploadError}
+                onUploadSuccess={this.handleUploadSuccess}
+                onProgress={this.handleProgress}
+              />
+            </label>
           </div>
           <button onClick={this.userDetails} type="submit">
             Register

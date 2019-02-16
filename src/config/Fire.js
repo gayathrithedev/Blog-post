@@ -7,7 +7,7 @@ var config = {
   authDomain: "awesome-blog-9900e.firebaseapp.com",
   databaseURL: "https://awesome-blog-9900e.firebaseio.com",
   projectId: "awesome-blog-9900e",
-  storageBucket: "",
+  storageBucket: "awesome-blog-9900e.appspot.com",
   messagingSenderId: "356937884597"
 };
 firebase.initializeApp(config);
