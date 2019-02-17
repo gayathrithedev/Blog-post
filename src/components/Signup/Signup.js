@@ -130,15 +130,7 @@ class Signup extends Component {
             {this.state.avatarURL && (
               <img src={this.state.avatarURL} alt="avatar" />
             )}
-            <label
-              style={{
-                backgroundColor: "steelblue",
-                color: "white",
-                padding: 10,
-                borderRadius: 4,
-                pointer: "cursor"
-              }}
-            >
+            <label>
               Select your awesome avatar
               <FileUploader
                 hidden
