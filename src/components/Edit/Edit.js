@@ -122,12 +122,11 @@ class Edit extends Component {
                 onUploadError={this.handleUploadError}
                 onUploadSuccess={this.handleUploadSuccess}
                 onProgress={this.handleProgress}
-                required
               />
             </label>
             <select
               name="tags"
-              defaultValue={this.state.tags}
+              value={this.state.tags}
               onChange={this.handleChange}
             >
               <option value="none">Select Tag</option>
