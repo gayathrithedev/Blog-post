@@ -30,7 +30,8 @@ class Edit extends Component {
           key: doc.id,
           title: post.title,
           description: post.description,
-          tags: post.tags
+          tags: post.tags,
+          avatarURL: post.avatarURL
         });
       } else {
         console.log("No such document!");
@@ -87,12 +88,48 @@ class Edit extends Component {
       });
   };
 
+  submit = e => {
+    e.preventDefault();
+
+    const {
+      title,
+      description,
+      tags,
+      avatarURL,
+      author,
+      dateandtime
+    } = this.state;
+
+    const updateRef = firebase
+      .firestore()
+      .collection("posts")
+      .doc(this.state.key);
+    updateRef
+      .set({
+        title,
+        description,
+        tags,
+        avatarURL: this.state.avatarURL,
+        author: firebase.auth().currentUser.email,
+        dateandtime: firebase.firestore.FieldValue.serverTimestamp()
+      })
+      .then(docRef => {
+        this.props.history.push("/show/" + this.props.match.params.id);
+      })
+      .catch(error => {
+        console.error("Error adding document: ", error);
+      });
+  };
+
   render() {
     return (
       <div className="edit-container">
         <Header />
         <div className="grid">
-          <form className="edit-form" onSubmit={this.onSubmit}>
+          <form
+            className="edit-form"
+            onSubmit={this.state.avatarURL === "" ? this.submit : this.onSubmit}
+          >
             <div className="publish">
               <button type="submit">Publish</button>
             </div>
