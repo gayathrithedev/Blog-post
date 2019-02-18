@@ -1,49 +1,42 @@
 import React, { Component } from "react";
 import firebase from "../../config/Fire";
 import FileUploader from "react-firebase-file-uploader";
-import "./Newpost.scss";
+import "./Edit.scss";
 import Header from "../Header/Header";
-import { Redirect } from "react-router";
-
-class Newpost extends Component {
+class Edit extends Component {
   constructor(props) {
     super(props);
-    this.ref = firebase.firestore().collection("posts");
     this.state = {
-      user: null,
+      key: "",
       title: "",
+      description: "",
       avatar: "",
       isUploading: false,
       progress: 0,
       avatarURL: "",
-      description: "",
-      tags: "",
-      flag: false
+      tags: ""
     };
     this.handleChange = this.handleChange.bind(this);
-    this.authListener = this.authListener.bind(this);
   }
-
   componentDidMount() {
-    this.authListener();
-  }
-  authListener() {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.setState({ user: user.email });
-        localStorage.setItem("user", user.email);
-        console.log(user.email);
+    const ref = firebase
+      .firestore()
+      .collection("posts")
+      .doc(this.props.match.params.id);
+    ref.get().then(doc => {
+      if (doc.exists) {
+        const post = doc.data();
+        this.setState({
+          key: doc.id,
+          title: post.title,
+          description: post.description,
+          tags: post.tags
+        });
       } else {
-        this.setState({ user: null });
+        console.log("No such document!");
       }
     });
   }
-
-  handleChange = e => {
-    const state = this.state;
-    state[e.target.name] = e.target.value;
-    this.setState(state);
-  };
 
   handleUploadSuccess = filename => {
     this.setState({ avatar: filename, progress: 100, isUploading: false });
@@ -55,49 +48,51 @@ class Newpost extends Component {
       .then(url => this.setState({ avatarURL: url }));
   };
 
+  handleChange = e => {
+    const state = this.state;
+    state[e.target.name] = e.target.value;
+    this.setState({ post: state });
+  };
+
   onSubmit = e => {
     e.preventDefault();
+
     const {
-      author,
       title,
       description,
-      dateandtime,
+      tags,
       avatarURL,
-      tags
+      author,
+      dateandtime
     } = this.state;
 
-    this.ref
-      .add({
-        author: this.state.user,
+    const updateRef = firebase
+      .firestore()
+      .collection("posts")
+      .doc(this.state.key);
+    updateRef
+      .set({
         title,
         description,
-        dateandtime: firebase.firestore.FieldValue.serverTimestamp(),
+        tags,
         avatarURL,
-        tags
+        author: firebase.auth().currentUser.email,
+        dateandtime: firebase.firestore.FieldValue.serverTimestamp()
       })
       .then(docRef => {
-        this.setState({
-          title: "",
-          description: ""
-        });
+        this.props.history.push("/show/" + this.props.match.params.id);
       })
       .catch(error => {
         console.error("Error adding document: ", error);
       });
-    this.setState({
-      flag: true
-    });
   };
 
   render() {
-    if (this.state.flag === true) {
-      return <Redirect to="/" />;
-    }
     return (
-      <div className="newpost-container">
+      <div className="edit-container">
         <Header />
         <div className="grid">
-          <form onSubmit={this.onSubmit}>
+          <form className="edit-form" onSubmit={this.onSubmit}>
             <div className="publish">
               <button type="submit">Publish</button>
             </div>
@@ -106,14 +101,16 @@ class Newpost extends Component {
               name="title"
               placeholder="Title"
               onChange={this.handleChange}
+              defaultValue={this.state.title}
               required
             />
             <textarea
               type="text"
-              required
               name="description"
               placeholder="Description"
               onChange={this.handleChange}
+              value={this.state.description}
+              required
             />
             <label>
               Add image
@@ -130,7 +127,7 @@ class Newpost extends Component {
             </label>
             <select
               name="tags"
-              value={this.state.tags}
+              defaultValue={this.state.tags}
               onChange={this.handleChange}
             >
               <option value="none">Select Tag</option>
@@ -148,4 +145,4 @@ class Newpost extends Component {
     );
   }
 }
-export default Newpost;
+export default Edit;

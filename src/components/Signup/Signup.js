@@ -33,6 +33,8 @@ class Signup extends Component {
         var errorMessage = error.message;
         // ...
       });
+    var close = document.getElementById("signupform");
+    close.style.display = "none";
   }
 
   userDetails() {

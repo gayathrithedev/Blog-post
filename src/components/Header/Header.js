@@ -64,11 +64,6 @@ class Header extends Component {
     firebase.auth().signOut();
   }
 
-  showCreatePost() {
-    var form = document.getElementById("newpost");
-    form.style.display = "block";
-  }
-
   render() {
     var myname = "";
     return (
@@ -86,7 +81,7 @@ class Header extends Component {
             ) : (
               <div className="me">
                 {this.state.users.map(user => {
-                  if (user.email === firebase.auth().currentUser.email)
+                  if (user.email === this.state.user.email)
                     return (
                       <div className="myinfo">
                         <img src={user.avatarURL} alt="myimage" />
@@ -96,7 +91,12 @@ class Header extends Component {
                 })}
                 <ul>
                   <li>Hi, {myname}</li>
-                  <li onClick={this.showCreatePost}>create new post</li>
+                  <li onClick={this.showCreatePost}>
+                    <a href="/newpost">create new post</a>
+                  </li>
+                  <li>
+                    <a href="/myposts">My Posts</a>
+                  </li>
                   <li>My profile</li>
                   <li>Bookmarks</li>
                   <li>Help</li>

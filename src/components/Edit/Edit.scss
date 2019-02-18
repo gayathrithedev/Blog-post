@@ -1,0 +1,60 @@
+.grid {
+  margin: 0 50px;
+}
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  padding: 50px 0;
+  .publish {
+    button {
+      float: right;
+      width: 135px;
+      margin-bottom: 20px;
+      font-size: 16px;
+      padding: 10px 0;
+      background-color: white;
+      color: #de7b85;
+      border: 1px solid #de7b85;
+      border-radius: 5px;
+    }
+  }
+  input[type="text"] {
+    border: none;
+    padding: 10px 20px;
+    font-size: 30px;
+    outline: none;
+    margin-bottom: 20px;
+    border-left: 1px solid lightpink;
+  }
+  textarea {
+    resize: none;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    outline: none;
+    margin-bottom: 20px;
+    border-left: 1px solid lightpink;
+    height: 250px;
+  }
+  select {
+    outline: none;
+    padding: 12px 20px;
+    font-size: 15px;
+    letter-spacing: 1px;
+    width: 200px;
+    margin-bottom: 20px;
+    background-color: white;
+    color: #de7b85;
+    border: 1px solid #de7b85;
+    border-radius: 5px;
+  }
+  label {
+    width: 158px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: white;
+    color: #de7b85;
+    border: 1px solid #de7b85;
+    padding: 10px 20px;
+  }
+}

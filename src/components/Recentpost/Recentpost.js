@@ -1,7 +1,17 @@
 import React, { Component } from "react";
 import "./Recentpost.scss";
+import firebase from "../../config/Fire";
 
 class RecentPost extends Component {
+  constructor(props) {
+    super(props);
+    this.ref = firebase.firestore().collection("posts");
+    this.connect = null;
+    this.state = {
+      posts: []
+    };
+  }
+
   render() {
     return (
       <div className="recentpost-container">

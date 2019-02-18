@@ -160,9 +160,14 @@
     background: white;
     padding: 0 20px;
     margin-top: 0;
+    overflow: auto;
     li {
       padding: 20px 0;
       cursor: pointer;
+      a {
+        text-decoration: none;
+        color: black;
+      }
     }
   }
 }

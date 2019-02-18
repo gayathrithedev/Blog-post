@@ -1,0 +1,39 @@
+.show-container {
+  .main-layout {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    .viewpost {
+      margin: 0 50px;
+      h1 {
+        transition: 0.3s ease-in;
+      }
+      h1:hover {
+        color: #de7b85;
+        cursor: pointer;
+      }
+      img {
+        width: unset;
+      }
+      p {
+        width: unset;
+      }
+    }
+  }
+}
+.edmodal-container {
+  margin-top: 50px;
+  a,
+  button {
+    cursor: pointer;
+    text-decoration: none;
+    margin: 30px;
+    padding: 10px 20px;
+    background-color: white;
+    color: #de7b85;
+    border: 1px solid #de7b85;
+    border-radius: 5px;
+    svg {
+      padding-right: 5px;
+    }
+  }
+}
