@@ -54,7 +54,7 @@ class Listpost extends Component {
               <img src={post.avatarURL} alt="avatar" />
               <div className="content">
                 <h4>
-                  <Link to={`/show/${post.key}`}>{post.title}</Link>
+                  <a href={`/show/${post.key}`}>{post.title}</a>
                 </h4>
                 <p>{post.tags}</p>
                 {/* <p>{post.dateandtime.seconds}</p> */}
