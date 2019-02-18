@@ -62,6 +62,7 @@ class Header extends Component {
 
   logout() {
     firebase.auth().signOut();
+    window.location = "/";
   }
 
   render() {
