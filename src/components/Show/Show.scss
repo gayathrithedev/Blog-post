@@ -1,7 +1,14 @@
 .show-container {
   .main-layout {
     display: grid;
-    grid-template-columns: 70% 30%;
+    grid-template-columns: 10% 60% 30%;
+    .social-media {
+      margin: 0 auto;
+      margin-top: 33px;
+      svg:hover {
+        cursor: pointer;
+      }
+    }
     .viewpost {
       margin: 0 50px;
       h1 {
@@ -36,5 +43,46 @@
     svg {
       padding-right: 5px;
     }
+  }
+}
+.SocialMediaShareCount.count {
+  padding: 7px;
+  color: #de7b85;
+}
+.SocialMediaShareButton {
+  display: flex;
+}
+form {
+  margin-top: 100px;
+  textarea {
+    resize: none;
+    border: none;
+    height: 30px;
+    padding: 10px 20px;
+    font-size: 18px;
+    outline: none;
+    margin-bottom: 20px;
+    border-left: 1px solid lightpink;
+    width: 100%;
+  }
+  button {
+    padding: 10px 20px;
+    background: white;
+    color: #de7b85;
+    border: 1px solid #de7b85;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+}
+.white {
+  color: gray;
+}
+.red {
+  color: red;
+}
+.like {
+  svg {
+    padding: 10px 0 10px 3px;
+    font-size: 24px;
   }
 }
