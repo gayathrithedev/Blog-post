@@ -149,7 +149,10 @@ class Show extends Component {
           {this.state.user === this.state.post.author ? (
             <div className="social-media">
               <div className="like">
-                <FaHeart onClick={this.like} className={this.state.likecolor} />
+                <FaHeart
+                  onClick={this.like}
+                  className={this.state.flag ? "red" : "white"}
+                />
               </div>
               <div className="share">
                 <FacebookShareButton

@@ -15,14 +15,15 @@ class Comment extends Component {
   onCollectionUpdate = querySnapshot => {
     const comments = [];
     querySnapshot.forEach(doc => {
-      const { username, user, comment, avatarURL } = doc.data();
+      const { username, user, comment, avatarURL, mykey } = doc.data();
       comments.push({
         key: doc.id,
         doc, // DocumentSnapshot
         username,
         user,
         comment,
-        avatarURL
+        avatarURL,
+        mykey
       });
     });
     this.setState({
@@ -38,15 +39,17 @@ class Comment extends Component {
     return (
       <div className="comment-container">
         {this.state.comments.map(comment => {
-          return (
-            <div className="comment">
-              <div className="content">
-                <img src={comment.avatarURL} alt="user profile" />
-                {comment.username}
+          if (this.props.postkey === comment.mykey) {
+            return (
+              <div className="comment">
+                <div className="content">
+                  <img src={comment.avatarURL} alt="user profile" />
+                  {comment.username}
+                </div>
+                <div className="user-comment">{comment.comment}</div>
               </div>
-              <div className="user-comment">{comment.comment}</div>
-            </div>
-          );
+            );
+          }
         })}
       </div>
     );

@@ -71,7 +71,9 @@ class Header extends Component {
       <div className="header-container">
         <div className="header">
           <div className="toplayout">
-            <div className="logo">Awesome Story</div>
+            <div className="logo">
+              <a href="/">Awesome Story</a>
+            </div>
             {this.state.user === null ? (
               <div className="auth">
                 <button onClick={this.showlogin}>Sign In</button>
