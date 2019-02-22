@@ -127,9 +127,6 @@ class Header extends Component {
                 <li>
                   <a href="">YYYYYY</a>
                 </li>
-                <li>
-                  <a href="">ZZZZZZ</a>
-                </li>
               </ul>
             </div>
             <div className="search">

@@ -32,7 +32,8 @@ class Show extends Component {
       username: "",
       shareURL: "https://awesome-story.herokuapp.com/",
       avatarURL: "",
-      flag: false
+      flag: true,
+      count: 0
     };
     this.handleChange = this.handleChange.bind(this);
     this.like = this.like.bind(this);
@@ -137,6 +138,15 @@ class Show extends Component {
     this.setState({
       flag: !this.state.flag
     });
+    if (this.state.flag === true) {
+      this.setState({
+        count: this.state.count + 1
+      });
+    } else {
+      this.setState({
+        count: this.state.count - 1
+      });
+    }
     console.log(this.state.flag);
   }
 
@@ -180,7 +190,7 @@ class Show extends Component {
               <div className="like">
                 <FaHeart
                   onClick={this.like}
-                  className={this.state.flag ? "red" : "white"}
+                  className={this.state.flag ? "white" : "red"}
                 />
               </div>
               <div className="share">
