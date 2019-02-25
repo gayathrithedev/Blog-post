@@ -37,13 +37,21 @@ img {
 }
 p {
   font-weight: 200;
-  letter-spacing: 2px;
-  font-size: 14px;
+  font-size: 16px;
+  width: 350px;
 }
 h5 {
   font-weight: 400;
   color: #de7b85;
   transition: padding-left 0.5s ease-in;
+  button {
+    background-color: #de7b85;
+    border: none;
+    padding: 8px 16px;
+    color: white;
+    border-radius: 5px;
+    outline: none;
+  }
 }
 .post {
   position: relative;

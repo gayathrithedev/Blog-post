@@ -4,7 +4,6 @@ import "./Header.scss";
 import Login from "../Login/Login";
 import Signup from "../Signup/Signup";
 import firebase from "../../config/Fire";
-import Newpost from "../Newpost/Newpost";
 
 class Header extends Component {
   constructor(props) {

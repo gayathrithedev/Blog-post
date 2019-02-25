@@ -13,26 +13,58 @@ class Newpost extends Component {
       user: null,
       title: "",
       avatar: "",
+      username: "",
       isUploading: false,
       progress: 0,
       avatarURL: "",
       description: "",
       tags: "",
-      flag: false
+      flag: false,
+      likecount: 0,
+      sharecount: 0,
+      users: []
     };
+    this.refuser = firebase.firestore().collection("users");
+    this.connect = null;
     this.handleChange = this.handleChange.bind(this);
     this.authListener = this.authListener.bind(this);
   }
 
+  onCollectionUpdate = querySnapshot => {
+    const users = [];
+    querySnapshot.forEach(doc => {
+      const { username, email, avatarURL } = doc.data();
+      users.push({
+        key: doc.id,
+        doc, // DocumentSnapshot
+        username,
+        email,
+        avatarURL
+      });
+    });
+    this.setState({
+      users
+    });
+    this.state.users.map(user => {
+      if (this.state.user === user.email) {
+        this.setState({
+          username: user.username
+        });
+      }
+    });
+  };
+
   componentDidMount() {
     this.authListener();
+    this.connect = this.refuser.onSnapshot(this.onCollectionUpdate);
+    alert(this.state.username);
   }
+
   authListener() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.setState({ user: user.email });
         localStorage.setItem("user", user.email);
-        console.log(user.email);
       } else {
         this.setState({ user: null });
       }
@@ -63,7 +95,10 @@ class Newpost extends Component {
       description,
       dateandtime,
       avatarURL,
-      tags
+      tags,
+      likecount,
+      sharecount,
+      username
     } = this.state;
 
     this.ref
@@ -73,7 +108,10 @@ class Newpost extends Component {
         description,
         dateandtime: firebase.firestore.FieldValue.serverTimestamp(),
         avatarURL,
-        tags
+        tags,
+        likecount,
+        sharecount,
+        username
       })
       .then(docRef => {
         this.setState({

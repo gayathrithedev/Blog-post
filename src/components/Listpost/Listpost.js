@@ -21,7 +21,8 @@ class Listpost extends Component {
         author,
         dateandtime,
         avatarURL,
-        tags
+        tags,
+        username
       } = doc.data();
       posts.push({
         key: doc.id,
@@ -31,7 +32,8 @@ class Listpost extends Component {
         author,
         dateandtime,
         avatarURL,
-        tags
+        tags,
+        username
       });
     });
     this.setState({
@@ -57,6 +59,9 @@ class Listpost extends Component {
                   <a href={`/show/${post.key}`}>{post.title}</a>
                 </h4>
                 <p>{post.tags}</p>
+                <p>
+                  by <b>{post.username}</b>
+                </p>
                 {/* <p>{post.dateandtime.seconds}</p> */}
               </div>
             </div>

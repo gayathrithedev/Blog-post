@@ -11,10 +11,7 @@ import {
   LinkedinIcon,
   FacebookShareButton,
   GooglePlusShareButton,
-  LinkedinShareButton,
-  FacebookShareCount,
-  GooglePlusShareCount,
-  LinkedinShareCount
+  LinkedinShareButton
 } from "react-share";
 import "./Show.scss";
 
@@ -23,6 +20,7 @@ class Show extends Component {
     super(props);
     this.ref = firebase.firestore().collection("users");
     this.ref2 = firebase.firestore().collection("comments");
+    this.postref = firebase.firestore().collection("posts");
     this.connect = null;
     this.state = {
       post: {},
@@ -32,7 +30,7 @@ class Show extends Component {
       username: "",
       shareURL: "https://awesome-story.herokuapp.com/",
       avatarURL: "",
-      flag: true,
+      flag: false,
       count: 0
     };
     this.handleChange = this.handleChange.bind(this);
@@ -134,7 +132,9 @@ class Show extends Component {
       });
   };
 
-  like() {
+  like = e => {
+    e.preventDefault();
+    console.log(this.state.flag);
     this.setState({
       flag: !this.state.flag
     });
@@ -147,8 +147,22 @@ class Show extends Component {
         count: this.state.count - 1
       });
     }
-    console.log(this.state.flag);
-  }
+    const { key } = this.setState;
+    const updateRef = firebase
+      .firestore()
+      .collection("posts")
+      .doc(key);
+    updateRef
+      .set({
+        likecount: this.state.count
+      })
+      .then(docRef => {
+        this.props.history.push("/show/" + this.props.match.params.id);
+      })
+      .catch(error => {
+        console.error("Error adding document: ", error);
+      });
+  };
 
   render() {
     var mykey = this.state.key;
@@ -190,7 +204,7 @@ class Show extends Component {
               <div className="like">
                 <FaHeart
                   onClick={this.like}
-                  className={this.state.flag ? "white" : "red"}
+                  className={this.state.flag ? "red" : "white"}
                 />
               </div>
               <div className="share">
@@ -199,42 +213,27 @@ class Show extends Component {
                   title={this.state.post.title}
                 >
                   <FacebookIcon size={32} round={true} />
-                  <FacebookShareCount
-                    url={this.state.shareURL}
-                    className="count"
-                  >
-                    {count => count}
-                  </FacebookShareCount>
                 </FacebookShareButton>
                 <GooglePlusShareButton
                   url={this.state.shareURL}
                   title={this.state.post.title}
                 >
                   <GooglePlusIcon size={32} round={true} />
-                  <GooglePlusShareCount
-                    url={this.state.shareURL}
-                    className="count"
-                  >
-                    {count => count}
-                  </GooglePlusShareCount>
                 </GooglePlusShareButton>
                 <LinkedinShareButton
                   url={this.state.shareURL}
                   title={this.state.post.uid}
                 >
                   <LinkedinIcon size={32} round={true} />
-                  <LinkedinShareCount
-                    url={this.state.shareURL}
-                    className="count"
-                  >
-                    {count => count}
-                  </LinkedinShareCount>
                 </LinkedinShareButton>
               </div>
             </div>
           )}
           <div className="viewpost">
             <h1>{this.state.post.title}</h1>
+            <h4>
+              by <i>{this.state.post.username}</i>
+            </h4>
             <h3>Tag : {this.state.post.tags}</h3>
             <img src={this.state.post.avatarURL} alt="post" />
             <p>{this.state.post.description}</p>
@@ -250,7 +249,8 @@ class Show extends Component {
                 </button>
               </div>
             ) : null}
-            {this.state.post.author !== this.state.user ? (
+            {this.state.post.author !== this.state.user &&
+            this.state.user !== null ? (
               <form className="post-comment" onSubmit={this.postComment}>
                 <textarea
                   type="text"

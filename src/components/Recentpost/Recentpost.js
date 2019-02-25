@@ -26,7 +26,9 @@ class RecentPost extends Component {
             the readable content of a page when looking at its layout.{" "}
             <a href="">read more</a>
           </p>
-          <h5>TRAVEL ______ Feb 5 . 10 min read</h5>
+          <h5>
+            <button>TRAVEL</button> ______ Feb 5 . 10 min read
+          </h5>
         </div>
         <div className="post">
           <img src={require("../../image/foodpost.jpg")} alt="post1" />
@@ -39,7 +41,9 @@ class RecentPost extends Component {
             the readable content of a page when looking at its layout.{" "}
             <a href="">read more</a>
           </p>
-          <h5>FOOD ______ Feb 5</h5>
+          <h5>
+            <button>FOOD</button> ______ Feb 5
+          </h5>
         </div>
         <div className="post">
           <img src={require("../../image/foodpost.jpg")} alt="post1" />
@@ -52,7 +56,9 @@ class RecentPost extends Component {
             the readable content of a page when looking at its layout.{" "}
             <a href="">read more</a>
           </p>
-          <h5>FASHION ______ Feb 5</h5>
+          <h5>
+            <button>FASHION</button> ______ Feb 5
+          </h5>
         </div>
       </div>
     );

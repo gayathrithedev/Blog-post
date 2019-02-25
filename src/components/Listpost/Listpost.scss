@@ -31,10 +31,16 @@
     }
     p {
       width: unset;
+      border-block-start: none;
+      border-block-end: none;
+      margin: 2px 0;
     }
     h4,
     p {
       padding-left: 20px;
+      border-block-start: none;
+      border-block-end: none;
+      margin: 2px 0;
     }
   }
 }
